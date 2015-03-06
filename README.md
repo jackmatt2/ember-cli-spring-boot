@@ -16,7 +16,7 @@ All `DS.belongsTo()` and `DS.hasMany()` relationships should be marked with `{as
 ```javascript
 //blog
 export default DS.Model.extend({
-        name : DS.attr('string'),
+	name : DS.attr('string'),
 	category : DS.belongsTo('category', {async : true}), //needs to be {async : true}
 	posts : DS.belongsTo('post', {async : true}) //needs to be {async : true}
 });
