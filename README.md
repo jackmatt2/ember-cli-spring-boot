@@ -120,7 +120,7 @@ public class SimpleCORSFilter implements Filter {
 }
 ```
 
-Additionally you will need to set the following file in config/environment.js of you ember-cli project inside the `APP` object.
+Additionally you will need to set the following variables in config/environment.js of you ember-cli project inside the `APP` object.
 ```
 ADAPTER_REST_HOST : 'http://localhost:8080',
 ADAPTER_REST_NAMESPACE = ''
