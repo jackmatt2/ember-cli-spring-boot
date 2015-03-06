@@ -30,7 +30,7 @@ JPA abstract Type:
 ```java
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Animal> {
+public abstract class Animal {
 
 	@Column
 	private String type;
@@ -120,7 +120,7 @@ public class SimpleCORSFilter implements Filter {
 }
 ```
 
-Additionally you will need to set the following file in config/environment.js of you ember-cli project.
+Additionally you will need to set the following file in config/environment.js of you ember-cli project inside the `APP` object.
 ```
 ADAPTER_REST_HOST : 'http://localhost:8080',
 ADAPTER_REST_NAMESPACE = ''
