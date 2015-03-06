@@ -2,7 +2,7 @@
 Spring Boot integration for  ember-data
 
 ##Feature Summary
-* Ember Model Requirements
+* Lazy loading of all relationships
 * spring-data-rest integration with ember-data
 * Polymorphic relationship support via JPA mappings
 * CORS Support
@@ -10,7 +10,7 @@ Spring Boot integration for  ember-data
 * Side Loading Records
 
 ##Feature Details
-###Ember Model Requirements
+###Lazy loading of all relationships
 All `DS.belongsTo()` and `DS.hasMany()` relationships should be marked with `{async : true}`. What this means is that all relationships are lazy loaded (Hibernate likes this).
 
 ```javascript
