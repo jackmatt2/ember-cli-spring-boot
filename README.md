@@ -122,7 +122,7 @@ public class SimpleCORSFilter implements Filter {
 
 Additionally you will need to set the following variables in config/environment.js of you ember-cli project inside the `APP` object.
 ```
-ADAPTER_REST_HOST : 'http://localhost:8080',
-ADAPTER_REST_NAMESPACE = ''
+ADAPTER_REST_HOST : 'http://localhost:8080', //point to your spring-boot server
+ADAPTER_REST_NAMESPACE = '' //needs to match spring.data.rest.base-uri in application.properties of you spring-boot app
 ```
 
