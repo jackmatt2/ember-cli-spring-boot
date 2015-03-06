@@ -81,7 +81,7 @@ this.store.find('animal');
 ```
 
 
-##Adding CORS Support to Spring Boot.  
+###Adding CORS Support to Spring Boot.  
 You will probably do you ember development on the http://localhost:4200 server, therefore, you will need to enable CORS in spring boot.
 
 ```java
