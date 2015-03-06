@@ -5,8 +5,8 @@ Spring Boot integration for  ember-data
 * Lazy loading of all relationships
 * spring-data-rest integration with ember-data
 * Polymorphic relationship support via JPA mappings
-* CORS Support
-* Adding Metadata to requests
+* CORS
+* Ember metadata
 * Side Loading Records
 
 ##Feature Details
@@ -96,7 +96,7 @@ this.store.find('animal');
 ```
 
 
-###Adding CORS Support to Spring Boot.  
+###CORS
 You will probably do you ember development on the http://localhost:4200 server, therefore, you will need to enable CORS in spring boot.
 
 ```java
@@ -140,7 +140,7 @@ Additionally you will need to set the following variables in config/environment.
 SPRING_BOOT_ADAPTER_REST_HOST : 'http://localhost:8080', //point to your spring-boot server
 SPRING_BOOT_ADAPTER_REST_NAMESPACE = '' //needs to match spring.data.rest.base-uri in application.properties of you spring-boot app
 ```
-###Adding Metadata to requests
+###Ember metadata
 TODO
 
 ###Side Loading Records
