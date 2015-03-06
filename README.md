@@ -2,11 +2,26 @@
 Spring Boot integration for  ember-data
 
 ##Feature Summary
+* Ember Model Requirements
 * spring-data-rest integration with ember-data
 * Polymorphic relationship support via JPA mappings
 * CORS Support
+* Adding Metadata to requests
+* Side Loading Records
 
 ##Feature Details
+###Ember Model Requirements
+All `DS.belongsTo()` and `DS.hasMany()` relationships should be marked with `{async : true}`. What this means is that all relationships are lazy loaded (Hibernate likes this).
+
+```javascript
+//blog
+export default DS.Model.extend({
+        name : DS.attr('string'),
+	category : DS.belongsTo('category', {async : true}), //needs to be {async : true}
+	posts : DS.belongsTo('post', {async : true}) //needs to be {async : true}
+});
+```
+
 ###spring-data-rest integration with ember-data
 By default spring-data-rest uses HAL JSON.  This plugin has a patch to convert HAL format to a format that is supported by ember-data.
 
@@ -125,4 +140,8 @@ Additionally you will need to set the following variables in config/environment.
 SPRING_BOOT_ADAPTER_REST_HOST : 'http://localhost:8080', //point to your spring-boot server
 SPRING_BOOT_ADAPTER_REST_NAMESPACE = '' //needs to match spring.data.rest.base-uri in application.properties of you spring-boot app
 ```
+###Adding Metadata to requests
+TODO
+
+###Side Loading Records
 
