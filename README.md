@@ -13,6 +13,7 @@ TODO - Still in Development
 * CORS
 * Ember metadata
 * Side Loading Records
+* Tips
 
 ##Feature Details
 ###Lazy loading of all relationships
@@ -149,4 +150,7 @@ SPRING_BOOT_ADAPTER_REST_NAMESPACE = '' //needs to match spring.data.rest.base-u
 TODO
 
 ###Side Loading Records
+TODO
 
+###Tips
+* Don't add the ember-cli project anywhere under `/src` or any folder that gets added to the tomcat server as this slows load time.  Instead create a new folder in the root of your project called `ember`.  Later you can deploy the production code via the build command `ember build --environment=production --output-path=../public` which will obfuscate, minify and other goodies.
