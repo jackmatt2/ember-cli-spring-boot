@@ -16,8 +16,13 @@ export default HalSerializer.extend({
     	for (var property in rawPayload._embedded) {
     		var originalValue = rawPayload._embedded[property];
     		var isOwnProperty = rawPayload._embedded.hasOwnProperty(property);
-    		var isSubclassOfPrimaryType = true;
+    		//var isSubclassOfPrimaryType = true;
     	    var isArray = Ember.isArray(originalValue);
+    	    
+    	    //Check if the property is a subclass of the primaryType requested
+    	    var collectionModelClass = property.singularize().dasherize();
+    	    var CollectionModel = store.modelFor(collectionModelClass);
+    	    var isSubclassOfPrimaryType = CollectionModel instanceof primaryType.constructor;
     	    
     		if (isOwnProperty && isSubclassOfPrimaryType && isArray) {
     			mergedPayload.pushObjects(originalValue);

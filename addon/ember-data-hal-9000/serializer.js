@@ -17,6 +17,11 @@ function extractLinksIntoMeta(payload, meta){
     meta.links = {};
 
     Ember.keys(links).forEach(function(key){
+//      if(key === 'self') {
+//    	  var href = links[key].href;
+//    	  var id = href.substring(href.lastIndexOf('/') + 1, href.length);
+//    	  payload.id = id;
+//      }
       meta.links[key] = links[key].href;
     });
   }
@@ -135,9 +140,14 @@ export default DS.RESTSerializer.extend({ //ActiveModel
       // Do not include a link for a property that already
       // exists on the hash, because Ember-Data will fetch that
       // resource by the link instead of using the included data
-      if (!hash[link]) {
+      if(link === 'self') {
+    	  var href = links[link].href;
+    	  var id = href.substring(href.lastIndexOf('/') + 1, href.length);
+    	  hash.id = id;
+      } if (!hash[link]) {
         hash.links[link] = links[link].href;
       }
+      
     });
 
     return this._super(type, hash, property);
