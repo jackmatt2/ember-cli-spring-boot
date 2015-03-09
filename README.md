@@ -8,6 +8,7 @@ TODO - Still in Development
 
 ##Feature Summary
 * Lazy loading of all relationships
+* Spring Boot Configuration
 * spring-data-rest integration with ember-data
 * Polymorphic relationship support via JPA mappings
 * CORS
@@ -26,6 +27,57 @@ export default DS.Model.extend({
 	category : DS.belongsTo('category', {async : true}), //needs to be {async : true}
 	posts : DS.belongsTo('post', {async : true}) //needs to be {async : true}
 });
+```
+
+###Spring Boot Configuration
+Add the following dependency:
+
+Gradle Users
+```
+compile("org.reflections:reflections:0.9.9-RC2")
+```
+
+Maven Users
+```xml
+<dependency>
+	<groupId>org.reflections</groupId>
+	<artifactId>reflections-maven</artifactId>
+	<version>0.9.9-RC2</version>
+</dependency>
+```
+You need to configure spring-data-rest to return the payload when creating and updating records.  In addition I configured it to also return the ID of the record although this is not strictly necessary as the ember parser will already do this for us. replace `com.yourpackage.domain` with the package containing your @Entity classes.
+
+```java
+package com.yourpackage;
+
+import java.nio.charset.Charset;
+import java.util.Set;
+
+import javax.persistence.Entity;
+
+import org.reflections.Reflections;
+import org.springframework.boot.autoconfigure.data.rest.SpringBootRepositoryRestMvcConfiguration;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
+import org.springframework.http.MediaType;
+
+@Configuration
+public class RepositoryConfig extends SpringBootRepositoryRestMvcConfiguration {
+
+	@Override
+	protected void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
+
+		Reflections reflections = new Reflections("com.yourpackage.domain");
+		Set<Class<?>> entities =
+				reflections.getTypesAnnotatedWith(Entity.class, false);
+
+		config.setReturnBodyOnCreate(true)
+				.setReturnBodyOnUpdate(true)
+				.exposeIdsFor(entities.toArray(new Class[entities.size()]))
+				.setDefaultMediaType(new MediaType("application", "json",
+						Charset.forName("UTF-8")));
+	}
+}
 ```
 
 ###spring-data-rest integration with ember-data
